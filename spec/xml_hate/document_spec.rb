@@ -5,7 +5,9 @@ describe XmlHate::Document do
   describe "with a simple car xml block" do
     before do
       xml = <<DOC
+<root>
 <car>a car</car>
+</root>
 DOC
       @document = XmlHate::Document.new(xml)
     end
@@ -24,7 +26,9 @@ DOC
   describe "with a simple truck xml block" do
     before do
       xml = <<DOC
+<root>
 <truck>a truck</truck>
+</root>
 DOC
       @document = XmlHate::Document.new(xml)
     end

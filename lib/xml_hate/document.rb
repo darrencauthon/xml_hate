@@ -1,12 +1,12 @@
 module XmlHate
   class Document
     def initialize(xml)
-      @document = ::Nokogiri::Slop(xml)
+      @document = XmlSimple.xml_in(xml)
     end
 
     def method_missing(meth, *args, &blk)
       begin
-        return @document.send(meth, *args, &blk)
+        return @document[meth.to_s]
       rescue
         return nil 
       end
