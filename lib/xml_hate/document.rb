@@ -1,14 +1,15 @@
 module XmlHate
   class Document
     def initialize(xml)
-    end
-
-    def car
-      Object.new
+      @document = ::Nokogiri::Slop(xml)
     end
 
     def method_missing(meth, *args, &blk)
-      nil
+      begin
+        return @document.send(meth, *args, &blk)
+      rescue
+        return nil 
+      end
     end
   end
 end
