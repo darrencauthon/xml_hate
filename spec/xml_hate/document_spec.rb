@@ -49,7 +49,7 @@ DOC
     before do
       xml = <<DOC
 <root>
-<boat name="Bulstrode"></boat>
+<boat name="Bulstrode" type="Cargo"></boat>
 </root>
 DOC
       @document = XmlHate::Document.new(xml)
@@ -57,6 +57,10 @@ DOC
   
     it "should return Bulstrode as the name" do
       @document.boat.name.must_equal "Bulstrode"  
+    end
+
+    it "should return Cargo as the type" do
+      @document.boat.type.must_equal "Cargo"  
     end
   end
 end
