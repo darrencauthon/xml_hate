@@ -44,4 +44,19 @@ DOC
       @document.else.must_equal ""
     end
   end
+
+  describe "with a more complex boat xml block" do
+    before do
+      xml = <<DOC
+<root>
+<boat name="Bulstrode"></boat>
+</root>
+DOC
+      @document = XmlHate::Document.new(xml)
+    end
+  
+    it "should return Bulstrode as the name" do
+      @document.boat.name.must_equal "Bulstrode"  
+    end
+  end
 end
