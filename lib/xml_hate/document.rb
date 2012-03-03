@@ -6,9 +6,9 @@ module XmlHate
 
     def method_missing(meth, *args, &blk)
       begin
-        return @document[meth.to_s]
+        return @document[meth.to_s][0] || ""
       rescue
-        return nil 
+        return "" 
       end
     end
   end

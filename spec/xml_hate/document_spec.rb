@@ -12,14 +12,14 @@ DOC
       @document = XmlHate::Document.new(xml)
     end
   
-    it "should return an object for car" do
-      @document.car.wont_be_nil  
+    it "should return a car for car" do
+      @document.car.must_equal "a car"  
     end
 
-    it "should return il for anything else" do
-      @document.blah.must_be_nil
-      @document.something.must_be_nil
-      @document.else.must_be_nil
+    it "should return an empty string for anything else" do
+      @document.blah.must_equal ""
+      @document.something.must_equal ""
+      @document.else.must_equal ""
     end
   end
 
@@ -33,15 +33,15 @@ DOC
       @document = XmlHate::Document.new(xml)
     end
   
-    it "should return an object for car" do
-      @document.truck.wont_be_nil  
+    it "should return a truck for truck" do
+      @document.truck.must_equal "a truck"  
     end
 
-    it "should return il for anything else" do
-      @document.car.must_be_nil
-      @document.blah.must_be_nil
-      @document.something.must_be_nil
-      @document.else.must_be_nil
+    it "should return an empty string for anything else" do
+      @document.car.must_equal ""
+      @document.blah.must_equal ""
+      @document.something.must_equal ""
+      @document.else.must_equal ""
     end
   end
 end
