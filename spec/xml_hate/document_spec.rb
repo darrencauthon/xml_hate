@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe XmlHate::Document do
 
+
   describe "with a simple car xml block" do
     before do
       xml = <<DOC
@@ -51,6 +52,10 @@ DOC
 <root>
 <boat name="Bulstrode" type="Cargo">
   <attitude>grumpy</attitude>
+  <location>The ocean</location>
+  <episode>ep 10</episode>
+  <episode>ep 11</episode>
+  <narrator firstname="George" lastname="Carlin" />
 </boat>
 </root>
 DOC
@@ -68,5 +73,21 @@ DOC
     it "should return attitude as grumpy" do
       @document.boat.attitude.must_equal "grumpy"  
     end
+
+    it "should return location as the ocean" do
+      @document.boat.location.must_equal "The ocean"  
+    end
+
+    it "should return both episodes" do
+      @document.boat.episode.count.must_equal 2
+      @document.boat.episode[0].must_equal "ep 10"
+      @document.boat.episode[1].must_equal "ep 11"
+    end
+
+    it "should return all information about the narrator" do
+      @document.boat.narrator.firstname.must_equal "George"
+      @document.boat.narrator.lastname.must_equal "Carlin"
+    end
+
   end
 end

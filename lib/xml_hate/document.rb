@@ -17,7 +17,7 @@ module XmlHate
 
         return_value[meth.to_s].each do |k, v|
           begin
-            return_value[meth.to_s][k] = v[0] if v.count == 1
+            return_value[meth.to_s][k] = v[0] if v.count == 1 
           rescue
           end
         end
