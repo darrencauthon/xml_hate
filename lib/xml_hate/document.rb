@@ -9,10 +9,11 @@ module XmlHate
     def method_missing(meth, *args, &blk)
       begin 
         return_value = Hashie::Mash.new
-        if @document[meth.to_s][0].class == String
-          return @document[meth.to_s][0]
-        end
-        return_value[meth.to_s] = Hashie::Mash.new(@document[meth.to_s][0])
+
+        this_node = @document[meth.to_s][0]
+        return this_node if this_node.class == String
+
+        return_value[meth.to_s] = Hashie::Mash.new(this_node)
         return return_value[meth.to_s]
       rescue 
         ""
