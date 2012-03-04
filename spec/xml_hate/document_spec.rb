@@ -90,4 +90,42 @@ DOC
     end
 
   end
+
+  describe "with an even more complex movie xml block" do
+    before do
+      xml = <<DOC
+<root>
+  <movie name="Deep Impact">
+    <actor name="Morgan Freeman" gender="Male" />
+    <actor name="Tea Leoni" gender="Female" />
+    <actor name="Elijah Wood" gender="Male">
+      <movie name="Lord of the Rings 1" />
+      <movie name="Lord of the Rings 2">
+        <actor name="Sean Astin" />
+      </movie>
+    </actor>
+  </movie>
+</root>
+DOC
+      @document = XmlHate::Document.new(xml)
+    end
+
+    it "should have a movie element" do
+      @document.movie.must_not_be_nil 
+    end
+
+    it "should have three actors" do
+      @document.movie.actor.count.must_equal 3
+    end
+
+    it "should have two other movies on the third actor" do
+      @document.movie.actor[2].movie.count.must_equal 2  
+    end
+
+    it "should have one actor underneath the second movie under the " do
+      @document.movie.actor[2].movie[1].actor.count.must_equal 1
+      @document.movie.actor[2].movie[1].actor.name.must_equal "Sean Astin"
+    end
+  end
+  
 end
