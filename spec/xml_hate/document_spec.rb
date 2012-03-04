@@ -75,6 +75,10 @@ DOC
     end
 
     it "should return location as the ocean" do
+      @document.boat.locations.count.must_equal 1  
+    end
+    
+    it "should return locations" do
       @document.boat.location.must_equal "The ocean"  
     end
 
@@ -133,6 +137,11 @@ DOC
 
     it "should be able to pull the year deep down the chain" do
       @document.movie.actor[2].movie[1].year.must_equal "2004"
+    end
+
+    it "should maintain years as an array deep down the list" do
+      @document.movie.actor[2].movie[1].years.count.must_equal 1
+      @document.movie.actor[2].movie[1].years[0].must_equal "2004" 
     end
   end
 end
