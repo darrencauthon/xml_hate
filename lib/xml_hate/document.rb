@@ -9,8 +9,7 @@ module XmlHate
 
     def method_missing(meth, *args, &blk)
       begin
-        this_node = @document[meth.to_s]
-        return_values = this_node.map { |n| process_this_node(n) }
+        return_values = @document[meth.to_s].map { |n| process_this_node(n) }
         return_values.count ==1 ? return_values[0] : return_values
       rescue
         ""
