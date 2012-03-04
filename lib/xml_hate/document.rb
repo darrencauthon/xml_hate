@@ -11,11 +11,10 @@ module XmlHate
         this_node = @document[meth.to_s][0]
         return this_node if this_node.class == String
 
-        return_value = Hashie::Mash.new
-        return_value[meth.to_s] = Hashie::Mash.new(this_node)
+        return_value = Hashie::Mash.new(this_node)
 
-        push_single_elements_up_to_attributes(return_value[meth.to_s])
-        return return_value[meth.to_s]
+        push_single_elements_up_to_attributes(return_value)
+        return return_value
       rescue
       end
     end
