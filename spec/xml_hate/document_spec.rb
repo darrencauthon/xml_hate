@@ -2,7 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe XmlHate::Document do
 
-
   describe "with a simple car xml block" do
     before do
       xml = <<DOC
@@ -116,7 +115,7 @@ DOC
     end
 
     it "should have a movie element" do
-      @document.movie.must_not_be_nil 
+      @document.movie.nil?.must_equal false 
     end
 
     it "should have three actors" do
