@@ -11,9 +11,7 @@ module XmlHate
       begin
         this_node = @document[meth.to_s]
         return_values = []
-        this_node.each do |n|
-          return_values << process_this_node(n) 
-        end
+        this_node.each { |n| return_values << process_this_node(n) }
         return return_values[0] if return_values.count == 1
         return return_values
       rescue
