@@ -13,7 +13,7 @@ This gem is where I'm going to put these conventions and processes of mine.  My 
 ``` xml
 <root>
   <directory>
-    <employee firstname="Galt">
+    <employee lastname="Galt">
       <address>123 W St</address>
       <address>456 S Blvd</address>
       <firstname>John</firstname>
@@ -24,4 +24,32 @@ This gem is where I'm going to put these conventions and processes of mine.  My 
     <employee lastname="Rearden" />
   </directory>
 </root>
+```
+
+```ruby
+document = XmlHate::Document.new(xml)
+
+document.directory.employees.count # 3, note pluralization happened automatically
+
+john_galt = document.directory.employees[0]
+
+# note how I treat the single-value element and attribute the same
+john_galt.lastname # Galt
+john_galt.firstname # John
+
+john_galt.addresses.count # 2, notice pluralization again
+
+howard_roark = document.directory.employees[1]
+
+howard_roark.firstname # Howard
+howard_roark.lastname # Roark
+howard_roark.addresses.count # 1
+howard_roark.address # 789 S
+
+rearden = document.directory.employees[2]
+rearden.lastname # Rearden
+rearden.firstname # "", defaults to empty string if the value cannot be found
+rearden.whatever_i_want # "", see above
+rearden.addresses.count # 0, returns [] by assuming you want the plural version
+
 ```
