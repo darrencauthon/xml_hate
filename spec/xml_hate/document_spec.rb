@@ -18,9 +18,9 @@ DOC
     end
 
     it "should return il for anything else" do
-      @document.blah.must_be_nil
-      @document.something.must_be_nil
-      @document.else.must_be_nil
+      @document.blah.must_equal ""
+      @document.something.must_equal ""
+      @document.else.must_equal ""
     end
   end
 
@@ -39,10 +39,10 @@ DOC
     end
 
     it "should return il for anything else" do
-      @document.car.must_be_nil
-      @document.blah.must_be_nil
-      @document.something.must_be_nil
-      @document.else.must_be_nil
+      @document.car.must_equal ""
+      @document.blah.must_equal ""
+      @document.something.must_equal ""
+      @document.else.must_equal ""
     end
   end
   

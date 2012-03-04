@@ -16,6 +16,7 @@ module XmlHate
         push_single_elements_up_to_attributes(return_value)
         return return_value
       rescue
+        ""
       end
     end
 
