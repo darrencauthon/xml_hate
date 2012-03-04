@@ -10,23 +10,14 @@ module XmlHate
     def method_missing(meth, *args, &blk)
       begin
         this_node = @document[meth.to_s]
-        if this_node.count == 1
-          this_node = this_node[0] if this_node.count == 1
-          return this_node if this_node.class == String
-
-          return_value = Hashie::Mash.new(this_node)
-          push_single_elements_up_to_attributes(return_value)
-
-          return return_value
-        else
-          return_values = []
-          this_node.each do |n|
-            sigh = Hashie::Mash.new(n)
-            push_single_elements_up_to_attributes(sigh)
-            return_values << sigh 
-          end
-          return return_values
+        return_values = []
+        this_node.each do |n|
+          sigh = Hashie::Mash.new(n)
+          push_single_elements_up_to_attributes(sigh)
+          return_values << sigh 
         end
+        return return_values[0] if return_values.count == 1
+        return return_values
       rescue
         ""
       end
