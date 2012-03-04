@@ -2,7 +2,7 @@ module XmlHate
   class Node
     def initialize(hash)
       hash.each do |k,v|
-        v = Node.new(v) if v.class == Hash
+        v = Node.new(v) if v.class == Hashie::Mash 
         self.instance_variable_set("@#{k}", v)
         self.class.send(:define_method, k, proc{self.instance_variable_get("@#{k}")})
         self.class.send(:define_method, "#{k}=", proc{|v| self.instance_variable_set("@#{k}", v)}) 

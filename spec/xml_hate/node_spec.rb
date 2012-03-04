@@ -36,6 +36,16 @@ describe XmlHate::Node do
       @object.cats.must_equal []
       @object.dogs.must_equal []
     end
+  end
+
+  describe "creating a node with a child Hashie::Match" do
+    before do
+      @object = XmlHate::Node.new({:thing => Hashie::Mash.new({:firstname => "John", :lastname => "Carter" })})
+    end
+
+    it "should return a node object for thing" do
+      @object.thing.class.must_equal XmlHate::Node 
+    end
 
   end
 end

@@ -96,6 +96,10 @@ DOC
       @document.boat.narrator.lastname.must_equal "Carlin"
     end
 
+    it "should set the narrator to an empty object" do
+      @document.boat.narrator.class.must_equal XmlHate::Node
+    end
+
   end
 
   describe "with an even more complex movie xml block" do
