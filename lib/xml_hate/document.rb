@@ -9,12 +9,20 @@ module XmlHate
 
     def method_missing(meth, *args, &blk)
       return "" if @document.has_key?(meth.to_s) == false 
-      nodes = @document[meth.to_s].map { |n| process_this_top_level_node(n) }
-      objects = convert_the_hashes_to_objects(nodes)
+      objects = pull_the_objects_from_the_xml_document(meth)
       objects.count == 1 ? objects[0] : objects
     end
 
     private
+
+    def pull_the_objects_from_the_xml_document(meth)
+      nodes = read_the_matching_nodes_from_the_xml_document(meth)
+      convert_the_hashes_to_objects(nodes)
+    end
+
+    def read_the_matching_nodes_from_the_xml_document(meth)
+      @document[meth.to_s].map { |n| process_this_top_level_node(n) }
+    end
 
     def convert_the_hashes_to_objects(objects)
       objects.map do |v|
