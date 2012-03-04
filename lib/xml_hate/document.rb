@@ -12,9 +12,7 @@ module XmlHate
         this_node = @document[meth.to_s]
         return_values = []
         this_node.each do |n|
-          sigh = Hashie::Mash.new(n)
-          push_single_elements_up_to_attributes(sigh)
-          return_values << sigh 
+          return_values << process_this_node(n) 
         end
         return return_values[0] if return_values.count == 1
         return return_values
@@ -24,6 +22,11 @@ module XmlHate
     end
 
     private
+
+    def process_this_node(node)
+      new_object = Hashie::Mash.new(node)
+      push_single_elements_up_to_attributes(new_object)
+    end
 
     def push_single_elements_up_to_attributes(node)
       array_values = {}
