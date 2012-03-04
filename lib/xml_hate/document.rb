@@ -9,14 +9,18 @@ module XmlHate
 
     def method_missing(meth, *args, &blk)
       return "" if @document.has_key?(meth.to_s) == false 
-      return_values = @document[meth.to_s].map { |n| process_this_top_level_node(n) }
-      return_values = return_values.map do |v|
-        v.class == Hashie::Mash ? Node.new(v) : v
-      end
-      return_values.count == 1 ? return_values[0] : return_values
+      nodes = @document[meth.to_s].map { |n| process_this_top_level_node(n) }
+      objects = convert_the_hashes_to_objects(nodes)
+      objects.count == 1 ? objects[0] : objects
     end
 
     private
+
+    def convert_the_hashes_to_objects(objects)
+      objects.map do |v|
+        v.class == Hashie::Mash ? Node.new(v) : v
+      end
+    end
 
     def process_this_top_level_node(node)
       return node if node.class == String
