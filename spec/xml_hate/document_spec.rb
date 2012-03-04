@@ -166,7 +166,7 @@ DOC
     end
 
     it "should have data" do
-
+      @document.product_group.listofgroups[1].product_groups[1].name.must_equal "Another product group"
     end
 
   end
