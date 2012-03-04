@@ -12,8 +12,8 @@ module XmlHate
         return this_node if this_node.class == String
 
         return_value = Hashie::Mash.new(this_node)
-
         push_single_elements_up_to_attributes(return_value)
+
         return return_value
       rescue
         ""
