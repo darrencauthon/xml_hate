@@ -22,24 +22,18 @@ module XmlHate
     end
 
     def push_single_elements_up_to_attributes(node)
-      array_values = {}
+      values_to_pluralize = {}
       node.each do |key, value|
         begin
           if value.count >= 1
-            array_values[key.pluralize] = value if key.pluralize != key
-            cleaned_values = []
-            value.each do |v|
-              cleaned_values << push_single_elements_up_to_attributes(v)
-            end
-            value = push_single_elements_up_to_attributes(value)
+            values_to_pluralize[key.pluralize] = value if key.pluralize != key
+            cleaned_values = value.map { |v| push_single_elements_up_to_attributes(v) }
           end
           node[key] = (value.count == 1 ? value[0] : value)
         rescue
         end
       end
-      array_values.each do |key, value|
-        node[key] = value
-      end
+      values_to_pluralize.each { |key, value| node[key] = value }
       node
     end
   end
