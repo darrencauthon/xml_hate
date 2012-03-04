@@ -124,7 +124,7 @@ DOC
 
     it "should have one actor underneath the second movie under the " do
       @document.movie.actor[2].movie[1].actor.count.must_equal 1
-      @document.movie.actor[2].movie[1].actor.name.must_equal "Sean Astin"
+      @document.movie.actor[2].movie[1].actor[0].name.must_equal "Sean Astin"
     end
   end
   
