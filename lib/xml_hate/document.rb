@@ -6,6 +6,20 @@ module XmlHate
       @document = XmlSimple.xml_in(xml)
     end
 
+    def push_single_elements_up_to_attributes(value)
+        value.each do |k, v|
+          begin
+            value[k] = v[0] if v.count == 1 
+            if v.count > 1
+              v.each do |i|
+                push_single_elements_up_to_attributes i
+              end
+            end
+          rescue
+          end
+        end
+    end
+    
     def method_missing(meth, *args, &blk)
       begin
         return_value = Hashie::Mash.new
@@ -15,13 +29,7 @@ module XmlHate
 
         return_value[meth.to_s] = Hashie::Mash.new(this_node)
 
-        return_value[meth.to_s].each do |k, v|
-          begin
-            return_value[meth.to_s][k] = v[0] if v.count == 1 
-          rescue
-          end
-        end
-        
+       push_single_elements_up_to_attributes(return_value[meth.to_s])
         return return_value[meth.to_s]
       rescue
       end

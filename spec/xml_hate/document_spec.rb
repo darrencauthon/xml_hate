@@ -124,8 +124,11 @@ DOC
     end
 
     it "should be able to pull the actor deep down the chain" do
-      @document.movie.actor[2].movie[1].actor.count.must_equal 1
-      @document.movie.actor[2].movie[1].actor[0].name.must_equal "Sean Astin"
+      @document.movie.actor[2].movie[1].actor.name.must_equal "Sean Astin"
+    end
+
+    it "should be able to pull the year deep down the chain" do
+      @document.movie.actor[2].movie[1].year.must_equal "2004"
     end
   end
   
