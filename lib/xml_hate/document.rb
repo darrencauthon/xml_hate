@@ -28,21 +28,25 @@ module XmlHate
       node.each do |key, value|
         begin
           if value.count >= 1
-            array_values[key] = value
-          end
-          node[key] = value[0] if value.count == 1 
-          if value.count > 1
-            value.each do |i|
-              push_single_elements_up_to_attributes i
+            array_values[key.pluralize] = value if key.pluralize != key
+            cleaned_values = []
+            value.each do |v|
+              cleaned_values << push_single_elements_up_to_attributes(v)
             end
+            value = cleaned_values
+          end
+          if value.count == 1
+            node[key] = value[0] 
+          else
+            node[key] = value
           end
         rescue
         end
       end
       array_values.each do |key, value|
-        plural_version = key.to_s.pluralize
-        node[plural_version] = value if plural_version != key
+        node[key] = value
       end
+      node
     end
   end
 end

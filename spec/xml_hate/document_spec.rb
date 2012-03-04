@@ -144,4 +144,30 @@ DOC
       @document.movie.actor[2].movie[1].years[0].must_equal "2004" 
     end
   end
+
+
+  describe "another xml example" do
+    before do
+      xml = <<DOC
+<root>
+  <product_group>
+    <name>A product group</name>
+    <listofgroup></listofgroup>
+    <listofgroup>
+      <product_group id="100"></product_group>
+      <product_group id="3">
+        <name>Another product group</name>
+      </product_group>
+    </listofgroup>
+  </product_group>
+</root>
+DOC
+      @document = XmlHate::Document.new(xml)
+    end
+
+    it "should have data" do
+
+    end
+
+  end
 end
