@@ -17,7 +17,7 @@ DOC
       @document.car.wont_be_nil  
     end
 
-    it "should return il for anything else" do
+    it "should return empty string for anything else" do
       @document.blah.must_equal ""
       @document.something.must_equal ""
       @document.else.must_equal ""
@@ -38,7 +38,7 @@ DOC
       @document.truck.wont_be_nil  
     end
 
-    it "should return il for anything else" do
+    it "should return empty string for anything else" do
       @document.car.must_equal ""
       @document.blah.must_equal ""
       @document.something.must_equal ""
