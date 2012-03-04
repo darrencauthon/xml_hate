@@ -38,10 +38,10 @@ module XmlHate
           end
         rescue
         end
-        array_values.each do |key, value|
-          plural_version = key.to_s.pluralize
-          node[plural_version] = value if plural_version != key
-        end
+      end
+      array_values.each do |key, value|
+        plural_version = key.to_s.pluralize
+        node[plural_version] = value if plural_version != key
       end
     end
   end
