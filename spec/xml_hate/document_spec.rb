@@ -119,6 +119,10 @@ DOC
       @document.movie.actor.count.must_equal 3
     end
 
+    it "should be able to pull acotrs out with plural property" do
+      @document.movie.actors.count.must_equal 3 
+    end
+
     it "should have two other movies on the third actor" do
       @document.movie.actor[2].movie.count.must_equal 2  
     end
@@ -131,5 +135,4 @@ DOC
       @document.movie.actor[2].movie[1].year.must_equal "2004"
     end
   end
-  
 end

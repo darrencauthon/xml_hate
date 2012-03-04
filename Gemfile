@@ -5,6 +5,7 @@ gemspec
 
 gem 'xml-simple'
 gem 'hashie'
+gem 'activesupport'
 
 gem 'minitest'
 group :development do
