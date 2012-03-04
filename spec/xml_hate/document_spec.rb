@@ -168,6 +168,30 @@ DOC
     it "should have data" do
       @document.product_group.listofgroups[1].product_groups[1].name.must_equal "Another product group"
     end
+  end
 
+  describe "another xml example with plurals after the root" do
+    before do
+      xml = <<DOC
+<root>
+  <product_group />
+  <product_group>
+    <name>A product group</name>
+    <listofgroup></listofgroup>
+    <listofgroup>
+      <product_group id="100"></product_group>
+      <product_group id="3">
+        <name>Another product group</name>
+      </product_group>
+    </listofgroup>
+  </product_group>
+</root>
+DOC
+      @document = XmlHate::Document.new(xml)
+    end
+
+    it "should have data" do
+      @document.product_group[1].listofgroups[1].product_groups[1].name.must_equal "Another product group"
+    end
   end
 end
