@@ -10,6 +10,9 @@ module XmlHate
     def method_missing(meth, *args, &blk)
       return "" if @document.has_key?(meth.to_s) == false 
       return_values = @document[meth.to_s].map { |n| process_this_top_level_node(n) }
+      return_values = return_values.map do |v|
+        v.class == Hashie::Mash ? Node.new(v) : v
+      end
       return_values.count == 1 ? return_values[0] : return_values
     end
 

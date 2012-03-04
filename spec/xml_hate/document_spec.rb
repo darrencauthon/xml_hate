@@ -60,6 +60,10 @@ DOC
 DOC
       @document = XmlHate::Document.new(xml)
     end
+
+    it "should return a node object for boat" do
+      @document.boat.class.must_equal XmlHate::Node  
+    end
   
     it "should return Bulstrode as the name" do
       @document.boat.name.must_equal "Bulstrode"  
