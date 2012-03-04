@@ -33,11 +33,7 @@ module XmlHate
             end
             value = push_single_elements_up_to_attributes(value)
           end
-          if value.count == 1
-            node[key] = value[0] 
-          else
-            node[key] = value
-          end
+          node[key] = (value.count == 1 ? value[0] : value)
         rescue
         end
       end
