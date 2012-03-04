@@ -102,6 +102,7 @@ DOC
       <movie name="Lord of the Rings 1" />
       <movie name="Lord of the Rings 2">
         <actor name="Sean Astin" />
+        <year>2004</year>
       </movie>
     </actor>
   </movie>
@@ -122,7 +123,7 @@ DOC
       @document.movie.actor[2].movie.count.must_equal 2  
     end
 
-    it "should have one actor underneath the second movie under the " do
+    it "should be able to pull the actor deep down the chain" do
       @document.movie.actor[2].movie[1].actor.count.must_equal 1
       @document.movie.actor[2].movie[1].actor[0].name.must_equal "Sean Astin"
     end
