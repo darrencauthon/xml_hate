@@ -17,13 +17,7 @@ module XmlHate
 
     def clean_up_the_value(value)
       return Node.new(value) if value.class == Hashie::Mash 
-      if value.class == Array
-        new_values = []
-        value.each do |i|
-          new_values << (i.class == Hashie::Mash ? Node.new(i) : i)
-        end
-        return new_values
-      end
+      return value.map {|i| i.class == Hashie::Mash ? Node.new(i) : i} if value.class == Array
       value
     end
   end
