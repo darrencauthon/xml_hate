@@ -48,4 +48,19 @@ describe XmlHate::Node do
     end
 
   end
+
+  describe "creating a node with an Array" do
+    before do
+      @object = XmlHate::Node.new({:thing => [Hashie::Mash.new(), "test"]})
+    end
+
+    it "should return a node object for the first item" do
+      @object.thing[0].class.must_equal XmlHate::Node 
+    end
+
+    it "should return a string for the second item" do
+      @object.thing[1].class.must_equal String 
+    end
+
+  end
 end

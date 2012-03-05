@@ -201,4 +201,36 @@ DOC
       @document.product_group[1].listofgroups[1].product_groups[1].name.must_equal "Another product group"
     end
   end
+
+  describe "an example from the readme file" do
+    before do
+      xml = <<DOC
+<root>
+  <directory>
+    <employee lastname="Galt">
+      <address>123 W St</address>
+      <address>456 S Blvd</address>
+      <firstname>John</firstname>
+    </employee>
+    <employee lastname="Roark" firstname="Howard">
+      <address>789 S</address>
+    </employee>
+    <employee lastname="Rearden" />
+  </directory>
+</root>
+DOC
+      @document = XmlHate::Document.new xml
+    end
+
+    it "should return directory as a Node" do
+      @document.directory.class.must_equal XmlHate::Node 
+    end
+
+    it "should return the employees as Nodes" do
+      @document.directory.employees.each do |e|
+        e.class.must_equal XmlHate::Node
+      end
+    end
+
+  end
 end
