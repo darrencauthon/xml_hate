@@ -65,7 +65,11 @@ module XmlHate
     end
 
     def get_properties_with_multiple_elements(node)
-      node.select{|k,v| get_the_number_of_elements(v) >= 1}
+      begin
+        node.select{|k,v| get_the_number_of_elements(v) >= 1}
+      rescue
+        []
+      end
     end
 
     def get_the_number_of_elements(value)
