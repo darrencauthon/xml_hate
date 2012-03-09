@@ -18,7 +18,7 @@ module XmlHate
       self.instance_variable_set("@#{k}", v)
       self.instance_eval("
       class << self
-        attr_accessor :#{k.to_sym}
+        attr_accessor :#{k}
       end")
     end
 
