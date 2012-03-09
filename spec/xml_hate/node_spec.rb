@@ -61,6 +61,20 @@ describe XmlHate::Node do
     it "should return a string for the second item" do
       @object.thing[1].class.must_equal String 
     end
+  end
 
+  describe "creating a node will create attributes for single instances of node" do
+    before do
+      @object1 = XmlHate::Node.new({:first_name => "Tyrone", :last_name => "Groves"})
+      @object2 = XmlHate::Node.new({:customer_id => 23})
+    end
+
+    it "should not respond to first name" do
+      @object2.respond_to?(:first_name).must_equal false
+    end
+
+    it "should not respond to last name" do
+      @object2.respond_to?(:last_name).must_equal false
+    end
   end
 end
