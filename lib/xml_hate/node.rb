@@ -16,7 +16,10 @@ module XmlHate
 
     def create_accessor_for(k, v)
       self.instance_variable_set("@#{k}", v)
-      self.class.send(:attr_accessor, k.to_sym)
+      self.instance_eval("
+      class << self
+        attr_accessor :#{k.to_sym}
+      end")
     end
 
     def convert_the_value_to_the_appropriate_form(value)
