@@ -28,10 +28,20 @@ module XmlHate
       end")
     end
 
-    def convert_the_value_to_the_appropriate_form(value)
-      return Node.new(value) if value.class == Hashie::Mash 
-      return value.map {|i| i.class == Hashie::Mash ? Node.new(i) : i} if value.class == Array
-      value
+    def convert_the_value_to_the_appropriate_form(the_value)
+      return Node.new(the_value) if the_value.class == Hashie::Mash 
+      return the_value.map {|i| i.class == Hashie::Mash ? Node.new(i) : i} if the_value.class == Array
+      attempt_to_attach_content_singleton_to_the_value the_value
+      the_value
+    end
+
+    def attempt_to_attach_content_singleton_to_the_value(the_value)
+      begin
+        def the_value.content
+          self
+        end
+      rescue
+      end
     end
   end
 end

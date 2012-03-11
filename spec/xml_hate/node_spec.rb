@@ -91,4 +91,20 @@ describe XmlHate::Node do
       @object.products.must_equal []
     end
   end
+
+  describe "using .content to access string values" do
+    before do
+      @object = XmlHate::Node.new({:firstname => "Ellis", :lastname => "Wyatt"})
+    end
+
+    it "should return strings for the first and last names" do
+      @object.firstname.must_equal "Ellis"
+      @object.lastname.must_equal "Wyatt"
+    end
+
+    it "should allow me to acces the value for the string using .content as well" do
+      @object.firstname.content.must_equal "Ellis"
+      @object.lastname.content.must_equal "Wyatt"
+    end
+  end
 end
