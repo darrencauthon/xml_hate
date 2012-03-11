@@ -77,4 +77,18 @@ describe XmlHate::Node do
       @object2.respond_to?(:last_name).must_equal false
     end
   end
+
+  describe "passing nil values as strings and sets" do
+    before do
+      @object = XmlHate::Node.new({:person => nil, :products => nil})
+    end
+
+    it "should return an empty string for the singular value" do
+      @object.person.must_equal ""
+    end
+
+    it "should return an empty set for the plural value" do
+      @object.products.must_equal []
+    end
+  end
 end
