@@ -107,4 +107,14 @@ describe XmlHate::Node do
       @object.lastname.content.must_equal "Wyatt"
     end
   end
+
+  describe "passing a key with dashes" do
+    before do
+      @object = XmlHate::Node.new({:"test-this" => "ok"})
+    end
+
+    it "should replace the dash with an underscore" do
+      @object.test_this.must_equal "ok"
+    end
+  end
 end

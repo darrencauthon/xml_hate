@@ -21,10 +21,11 @@ module XmlHate
     end
 
     def create_accessor_for(k, v)
-      self.instance_variable_set("@#{k}", v)
+      property_name = k.to_s.gsub('-', '_').to_sym
+      self.instance_variable_set("@#{property_name}", v)
       self.instance_eval("
       class << self
-        attr_accessor :#{k}
+        attr_accessor :#{property_name}
       end")
     end
 
