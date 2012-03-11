@@ -51,7 +51,7 @@ module XmlHate
 
     def bring_up_single_elements_as_properties(node)
       get_properties_with_multiple_elements(node).each do |key, value|
-        value.each { |v| process_this_inner_node(v) }
+        value.each { |v| process_this_inner_node(v.to_s) }
         node[key] = value[0] if get_the_number_of_elements(value) == 1 
       end
     end
