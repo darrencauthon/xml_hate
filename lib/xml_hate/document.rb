@@ -44,7 +44,9 @@ module XmlHate
       bring_up_single_elements_as_properties(node)
 
       # now "pluralize" by setting the pluralized key
-      values_to_pluralize.each { |key, value| node[key] = value }
+      values_to_pluralize.each do |key, value| 
+        node[key] = value if !key.nil?
+      end
 
       node
     end
