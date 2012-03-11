@@ -102,9 +102,13 @@ describe XmlHate::Node do
       @object.lastname.must_equal "Wyatt"
     end
 
-    it "should allow me to acces the value for the string using .content as well" do
+    it "should allow me to access the value for the string using .content as well" do
       @object.firstname.content.must_equal "Ellis"
       @object.lastname.content.must_equal "Wyatt"
+    end
+
+    it "should allow me to access the nonexistent values using .content" do
+      @object.something_else.content.must_equal "" 
     end
   end
 

@@ -17,7 +17,11 @@ module XmlHate
     end
 
     def an_empty_array_for_plurals_or_empty_string_for_singulars(meth)
-      meth.to_s == meth.to_s.pluralize ? [] : ""
+      return [] if meth.to_s == meth.to_s.pluralize
+
+      empty_string = ""
+      attempt_to_attach_content_singleton_to_the_value empty_string
+      empty_string
     end
 
     def create_accessor_for(k, v)
