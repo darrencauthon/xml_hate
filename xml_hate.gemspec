@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["darren@cauthon.com"]
   s.homepage    = ""
   s.summary     = %q{Handling xml with my own ten-foot poll.}
-  s.description = %q{I hate xml.}
+  s.description = %q{xml handling without the xml.}
 
   s.rubyforge_project = "xml_hate"
 
@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_runtime_dependency 'xml-simple'
   s.add_runtime_dependency 'hashie'
+  s.add_development_dependency 'rake'
 end
