@@ -36,6 +36,7 @@ module XmlHate
     def get_a_valid_property_name(name)
       name = name.to_s.gsub('-', '_')
       name = name.gsub('@', '')
+      name = name.gsub(':', '')
       name.to_sym
     end
 

@@ -133,4 +133,14 @@ describe XmlHate::Node do
     end
   end
 
+  describe "passing a key with :" do
+    before do
+      @object = XmlHate::Node.new({:"xml:ns" => "data"})
+    end
+
+    it "should replace the @ with nothing" do
+      @object.xmlns.must_equal "data"
+    end
+  end
+
 end
