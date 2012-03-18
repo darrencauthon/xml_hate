@@ -25,12 +25,18 @@ module XmlHate
     end
 
     def create_accessor_for(k, v)
-      property_name = k.to_s.gsub('-', '_').to_sym
+      property_name = get_a_valid_property_name(k)
       self.instance_variable_set("@#{property_name}", v)
       self.instance_eval("
       class << self
         attr_accessor :#{property_name}
       end")
+    end
+
+    def get_a_valid_property_name(name)
+      name = name.to_s.gsub('-', '_')
+      name = name.gsub('@', '')
+      name.to_sym
     end
 
     def convert_the_value_to_the_appropriate_form(the_value)

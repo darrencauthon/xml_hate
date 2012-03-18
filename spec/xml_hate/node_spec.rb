@@ -122,4 +122,15 @@ describe XmlHate::Node do
       @object.test_this.must_equal "ok"
     end
   end
+
+  describe "passing a key with @" do
+    before do
+      @object = XmlHate::Node.new({:"@xml" => "data"})
+    end
+
+    it "should replace the @ with nothing" do
+      @object.xml.must_equal "data"
+    end
+  end
+
 end
