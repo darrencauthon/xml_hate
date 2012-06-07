@@ -21,5 +21,6 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_runtime_dependency 'xml-simple'
   s.add_runtime_dependency 'hashie'
+  s.add_runtime_dependency 'activesupport'
   s.add_development_dependency 'rake'
 end
