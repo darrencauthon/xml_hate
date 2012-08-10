@@ -1,4 +1,4 @@
-# XML Hate
+# XML Hate [![Build Status](https://secure.travis-ci.org/darrencauthon/xml_hate.png?branch=master)](http://travis-ci.org/darrencauthon/xml_hate)
 
 ## Reading XML with my own ten-foot poll.
 
