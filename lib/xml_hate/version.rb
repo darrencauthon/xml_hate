@@ -1,3 +1,3 @@
 module XmlHate
-  VERSION = "0.8.3.4"
+  VERSION = "1.0.0"
 end
