@@ -8,7 +8,7 @@ module XmlHate
     end
 
     def method_missing(meth, *args, &blk)
-      return "" if @document.has_key?(meth.to_s) == false 
+      return '' unless @document.has_key?(meth.to_s)
       objects = pull_the_objects_from_the_xml_document(meth)
       objects.count == 1 ? objects[0] : objects
     end
