@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = XmlHate::VERSION
   s.authors     = ["Darren Cauthon"]
   s.email       = ["darren@cauthon.com"]
-  s.homepage    = ""
+  s.homepage    = "http://www.github.com/darrencauthon/xml_hate"
   s.summary     = %q{Handling xml with my own ten-foot poll.}
   s.description = %q{xml handling without the xml.}
 
