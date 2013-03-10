@@ -1,4 +1,4 @@
-# XML Hate [![Build Status](https://secure.travis-ci.org/darrencauthon/xml_hate.png?branch=master)](http://travis-ci.org/darrencauthon/xml_hate)
+# XML Hate [![Build Status](https://secure.travis-ci.org/darrencauthon/xml_hate.png?branch=master)](http://travis-ci.org/darrencauthon/xml_hate) [![Coverage Status](https://coveralls.io/repos/darrencauthon/xml_hate/badge.png?branch=master)](https://coveralls.io/r/darrencauthon/xml_hate)
 
 ## Reading XML with my own ten-foot poll.
 
