@@ -8,7 +8,10 @@ module XmlHate
     end
 
     def method_missing(meth, *args, &blk)
-      return '' unless @document.has_key?(meth.to_s)
+      meth = meth.to_s
+      unless @document.has_key?(meth)
+        return ''
+      end
       objects = pull_the_objects_from_the_xml_document(meth)
       objects.count == 1 ? objects[0] : objects
     end
@@ -21,7 +24,7 @@ module XmlHate
     end
 
     def read_the_matching_nodes_from_the_xml_document(meth)
-      @document[meth.to_s].map { |n| process_this_top_level_node(n) }
+      @document[meth].map { |n| process_this_top_level_node(n) }
     end
 
     def convert_the_hashes_to_objects(objects)
