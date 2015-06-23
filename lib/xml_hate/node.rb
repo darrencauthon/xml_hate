@@ -52,13 +52,7 @@ module XmlHate
       return Node.new(the_value) if the_value.class == Hashie::Mash 
       return the_value.map {|i| i.class == Hashie::Mash ? Node.new(i) : i} if the_value.class == Array
       attempt_to_attach_content_singleton_to_the_value the_value
-      if the_value.is_a?(Node)
-        keys = the_value._keys.map { |x| x.to_s.singularize }.uniq
-        if keys.count == 1 && the_value.send(keys.first.to_sym).is_a?(Array)
-          the_value = the_value.send(keys.first.to_sym)
-        end
-      end
-      the_value
+      flatten_any_duplicate_arrays_in the_value
     end
 
     def attempt_to_attach_content_singleton_to_the_value(the_value)
@@ -68,6 +62,16 @@ module XmlHate
         end
       rescue
       end
+    end
+
+    def flatten_any_duplicate_arrays_in node
+      if node.is_a?(Node)
+        keys = node._keys.map { |x| x.to_s.singularize }.uniq
+        if keys.count == 1 && node.send(keys.first.to_sym).is_a?(Array)
+          return node.send(keys.first.to_sym)
+        end
+      end
+      node
     end
 
   end
