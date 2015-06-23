@@ -4,16 +4,32 @@ require 'active_support/inflector'
 module XmlHate
   class Document
     def initialize(xml)
-      @document = XmlSimple.xml_in(xml)
+      @document = lower_case_please(XmlSimple.xml_in(xml))
     end
 
     def method_missing(meth, *args, &blk)
-      return '' unless @document.has_key?(meth.to_s)
+      meth = meth.to_s
+      unless @document.has_key?(meth)
+        if @document.has_key?(meth.singularize)
+          meth = meth.singularize
+        else
+          return ''
+        end
+      end
       objects = pull_the_objects_from_the_xml_document(meth)
       objects.count == 1 ? objects[0] : objects
     end
 
     private
+
+    def lower_case_please hash
+      hash.keys.reduce({}) do |t, key|
+        value = hash[key].is_a?(Hash) ? lower_case_please(hash[key])
+                                      : hash[key]
+        value = hash[key]
+        t.merge!( { key.to_s.underscore => value } )
+      end
+    end
 
     def pull_the_objects_from_the_xml_document(meth)
       nodes = read_the_matching_nodes_from_the_xml_document(meth)
@@ -21,7 +37,7 @@ module XmlHate
     end
 
     def read_the_matching_nodes_from_the_xml_document(meth)
-      @document[meth.to_s].map { |n| process_this_top_level_node(n) }
+      @document[meth].map { |n| process_this_top_level_node(n) }
     end
 
     def convert_the_hashes_to_objects(objects)
@@ -54,7 +70,7 @@ module XmlHate
     def bring_up_single_elements_as_properties(node)
       get_properties_with_multiple_elements(node).each do |key, value|
         value.each { |v| process_this_inner_node(v) }
-        node[key] = value[0] if get_the_number_of_elements(value) == 1 
+        node[key] = value[0] if get_the_number_of_elements(value) == 1
       end
     end
 
