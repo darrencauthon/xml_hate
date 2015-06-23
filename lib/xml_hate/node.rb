@@ -7,8 +7,14 @@ module XmlHate
     def initialize(hash)
       @_keys = []
       all_items_in_the_hash_that_are_not_nil(hash).each do |k, v|
-        form = convert_the_value_to_the_appropriate_form(v)
         @_keys << get_a_valid_property_name(k)
+        form = convert_the_value_to_the_appropriate_form(v)
+        if form.is_a?(Node)
+          keys = form._keys.map { |x| x.to_s.singularize }.uniq
+          if keys.count == 1 && form.send(keys.first.to_sym).is_a?(Array)
+            form = form.send(keys.first.to_sym)
+          end
+        end
         create_accessor_for k, form
       end
     end
@@ -52,7 +58,7 @@ module XmlHate
       return Node.new(the_value) if the_value.class == Hashie::Mash 
       return the_value.map {|i| i.class == Hashie::Mash ? Node.new(i) : i} if the_value.class == Array
       attempt_to_attach_content_singleton_to_the_value the_value
-      flatten_any_duplicate_arrays_in the_value
+      the_value
     end
 
     def attempt_to_attach_content_singleton_to_the_value(the_value)
@@ -62,16 +68,6 @@ module XmlHate
         end
       rescue
       end
-    end
-
-    def flatten_any_duplicate_arrays_in node
-      if node.is_a?(Node)
-        keys = node._keys.map { |x| x.to_s.singularize }.uniq
-        if keys.count == 1 && node.send(keys.first.to_sym).is_a?(Array)
-          return node.send(keys.first.to_sym)
-        end
-      end
-      node
     end
 
   end
