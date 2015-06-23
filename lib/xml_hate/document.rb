@@ -7,15 +7,6 @@ module XmlHate
       @document = lower_case_please(XmlSimple.xml_in(xml))
     end
 
-    def lower_case_please hash
-      hash.keys.reduce({}) do |t, key|
-        value = hash[key].is_a?(Hash) ? lower_case_please(hash[key])
-                                      : hash[key]
-        value = hash[key]
-        t.merge!( { key.to_s.underscore => value } )
-      end
-    end
-
     def method_missing(meth, *args, &blk)
       meth = meth.to_s
       unless @document.has_key?(meth)
@@ -26,6 +17,15 @@ module XmlHate
     end
 
     private
+
+    def lower_case_please hash
+      hash.keys.reduce({}) do |t, key|
+        value = hash[key].is_a?(Hash) ? lower_case_please(hash[key])
+                                      : hash[key]
+        value = hash[key]
+        t.merge!( { key.to_s.underscore => value } )
+      end
+    end
 
     def pull_the_objects_from_the_xml_document(meth)
       nodes = read_the_matching_nodes_from_the_xml_document(meth)
