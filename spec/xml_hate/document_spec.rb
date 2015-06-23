@@ -233,4 +233,21 @@ DOC
     end
 
   end
+
+  describe "uppercase stuff" do
+    before do
+      xml = <<DOC
+<Root>
+<Car Name="Testing" Color="Blue"/>
+</Root>
+DOC
+      @document = XmlHate::Document.new(xml)
+    end
+
+    it "should return the properties as lower-case values" do
+      @document.name.must_equal "Testing"
+      @document.color.must_equal "Blue"
+    end
+  end
+
 end
