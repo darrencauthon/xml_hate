@@ -245,8 +245,8 @@ DOC
     end
 
     it "should return the properties as lower-case values" do
-      @document.name.must_equal "Testing"
-      @document.color.must_equal "Blue"
+      @document.car.name.must_equal "Testing"
+      @document.car.color.must_equal "Blue"
     end
   end
 

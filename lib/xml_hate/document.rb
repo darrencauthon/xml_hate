@@ -4,7 +4,16 @@ require 'active_support/inflector'
 module XmlHate
   class Document
     def initialize(xml)
-      @document = XmlSimple.xml_in(xml)
+      @document = lower_case_please(XmlSimple.xml_in(xml))
+    end
+
+    def lower_case_please hash
+      hash.keys.reduce({}) do |t, key|
+        value = hash[key].is_a?(Hash) ? lower_case_please(hash[key])
+                                      : hash[key]
+        value = hash[key]
+        t.merge!( { key.to_s.underscore => value } )
+      end
     end
 
     def method_missing(meth, *args, &blk)
@@ -57,7 +66,7 @@ module XmlHate
     def bring_up_single_elements_as_properties(node)
       get_properties_with_multiple_elements(node).each do |key, value|
         value.each { |v| process_this_inner_node(v) }
-        node[key] = value[0] if get_the_number_of_elements(value) == 1 
+        node[key.downcase] = value[0] if get_the_number_of_elements(value) == 1
       end
     end
 
