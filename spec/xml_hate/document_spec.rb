@@ -277,6 +277,27 @@ DOC
 
     end
 
+    describe "an even more complicated example" do
+      before do
+        xml = <<DOC
+<Root>
+  <User Id="1234">
+    <Fields>
+      <Field Name="The Test" />
+      <Field Name="Another Test" />
+    </Fields>
+  </User>
+</Root>
+DOC
+        @document = XmlHate::Document.new(xml)
+      end
+
+      it "should flatten the fields/fields thing" do
+        @document.user.fields[0].name.must_equal "The Test"
+      end
+
+    end
+
   end
 
 end

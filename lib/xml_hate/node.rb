@@ -1,8 +1,18 @@
 module XmlHate
   class Node
+    attr_reader :_keys
     def initialize(hash)
+      @_keys = []
       all_items_in_the_hash_that_are_not_nil(hash).each do |k, v|
-        create_accessor_for k, convert_the_value_to_the_appropriate_form(v)
+        form = convert_the_value_to_the_appropriate_form(v)
+        @_keys << get_a_valid_property_name(k)
+        if form.is_a?(Node)
+          keys = form._keys.map { |x| x.to_s.singularize }.uniq
+          if keys.count == 1 && form.send(keys.first.to_sym).is_a?(Array)
+            form = form.send(keys.first.to_sym)
+          end
+        end
+        create_accessor_for k, form
       end
     end
 
