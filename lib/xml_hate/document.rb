@@ -10,7 +10,11 @@ module XmlHate
     def method_missing(meth, *args, &blk)
       meth = meth.to_s
       unless @document.has_key?(meth)
-        return ''
+        if @document.has_key?(meth.singularize)
+          meth = meth.singularize
+        else
+          return ''
+        end
       end
       objects = pull_the_objects_from_the_xml_document(meth)
       objects.count == 1 ? objects[0] : objects

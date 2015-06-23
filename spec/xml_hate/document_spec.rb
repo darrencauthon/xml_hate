@@ -258,6 +258,25 @@ DOC
 
     end
 
+    describe "a more complicated example" do
+
+      before do
+        xml = <<DOC
+<Root>
+<FancyCar Name="Testing" Color="Blue" BodyColor="Red"/>
+<FancyCar Name="Testing2" Color="Blue2" BodyColor="Red2"/>
+</Root>
+DOC
+        @document = XmlHate::Document.new(xml)
+      end
+
+      it "should return the properties as lower-case values" do
+        @document.fancy_cars[0].name.must_equal "Testing"
+        @document.fancy_cars[0].color.must_equal "Blue"
+      end
+
+    end
+
   end
 
 end
