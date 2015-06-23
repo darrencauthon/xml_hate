@@ -37,7 +37,7 @@ module XmlHate
       name = name.to_s.gsub('-', '_')
       name = name.gsub('@', '')
       name = name.gsub(':', '')
-      name = name.downcase
+      name = name.underscore
       name.to_sym
     end
 

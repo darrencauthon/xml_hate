@@ -238,7 +238,7 @@ DOC
     before do
       xml = <<DOC
 <Root>
-<Car Name="Testing" Color="Blue"/>
+<Car Name="Testing" Color="Blue" BodyColor="Red"/>
 </Root>
 DOC
       @document = XmlHate::Document.new(xml)
@@ -247,6 +247,10 @@ DOC
     it "should return the properties as lower-case values" do
       @document.car.name.must_equal "Testing"
       @document.car.color.must_equal "Blue"
+    end
+
+    it "should return the underscore" do
+      @document.car.body_color.must_equal "Red"
     end
   end
 
