@@ -234,7 +234,7 @@ DOC
 
   end
 
-  describe "uppercase stuff" do
+  describe "snake-case the values" do
     before do
       xml = <<DOC
 <Root>
