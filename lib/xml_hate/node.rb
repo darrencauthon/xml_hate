@@ -1,6 +1,9 @@
 module XmlHate
+
   class Node
+
     attr_reader :_keys
+
     def initialize(hash)
       @_keys = []
       all_items_in_the_hash_that_are_not_nil(hash).each do |k, v|
@@ -66,5 +69,7 @@ module XmlHate
       rescue
       end
     end
+
   end
+
 end
