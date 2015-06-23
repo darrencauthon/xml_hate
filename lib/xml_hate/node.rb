@@ -9,12 +9,6 @@ module XmlHate
       all_items_in_the_hash_that_are_not_nil(hash).each do |k, v|
         form = convert_the_value_to_the_appropriate_form(v)
         @_keys << get_a_valid_property_name(k)
-        if form.is_a?(Node)
-          keys = form._keys.map { |x| x.to_s.singularize }.uniq
-          if keys.count == 1 && form.send(keys.first.to_sym).is_a?(Array)
-            form = form.send(keys.first.to_sym)
-          end
-        end
         create_accessor_for k, form
       end
     end
@@ -58,6 +52,12 @@ module XmlHate
       return Node.new(the_value) if the_value.class == Hashie::Mash 
       return the_value.map {|i| i.class == Hashie::Mash ? Node.new(i) : i} if the_value.class == Array
       attempt_to_attach_content_singleton_to_the_value the_value
+      if the_value.is_a?(Node)
+        keys = the_value._keys.map { |x| x.to_s.singularize }.uniq
+        if keys.count == 1 && the_value.send(keys.first.to_sym).is_a?(Array)
+          the_value = the_value.send(keys.first.to_sym)
+        end
+      end
       the_value
     end
 
