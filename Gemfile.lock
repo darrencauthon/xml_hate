@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    xml_hate (2.0.0)
+    xml_hate (2.1.0)
       activesupport
       hashie
       xml-simple
