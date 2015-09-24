@@ -37,6 +37,12 @@ describe XmlHate::Node do
       @object.cats.must_equal []
       @object.dogs.must_equal []
     end
+
+    describe "to_hash" do
+      it "should return the node as a hash" do
+        @object.to_hash.must_equal( { firstname: 'John', lastname: 'Carter' } )
+      end
+    end
   end
 
   describe "creating a node with a child Hashie::Match" do

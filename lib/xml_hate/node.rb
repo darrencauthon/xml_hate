@@ -23,6 +23,10 @@ module XmlHate
       an_empty_array_for_plurals_or_empty_string_for_singulars meth
     end
 
+    def to_hash
+      @_keys.reduce({}) { |t, i| t.merge(i => self.send(i) ) }
+    end
+
     private
 
     def all_items_in_the_hash_that_are_not_nil(the_hash)
