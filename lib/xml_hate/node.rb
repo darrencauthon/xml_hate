@@ -27,6 +27,8 @@ module XmlHate
       @_keys.reduce({}) { |t, i| t.merge(i => self.send(i) ) }
     end
 
+    def to_ary; nil; end
+
     private
 
     def all_items_in_the_hash_that_are_not_nil(the_hash)
