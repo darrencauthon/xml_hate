@@ -300,4 +300,22 @@ DOC
 
   end
 
+  describe "requesting multiple items with a plural word, and there is one item" do
+    before do
+      xml = <<DOC
+<Lead>
+<Fields>
+  <Field FieldId=\"91\" Value=\"TUL\" FieldTitle=\"College\" FieldType=\"Dropdown\" />
+</Fields>
+</Lead>
+DOC
+      @document = XmlHate::Document.new(xml)
+    end
+
+    it "should return one item" do
+      @document.fields.count.must_equal 1
+    end
+
+  end
+
 end

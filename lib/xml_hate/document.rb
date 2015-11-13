@@ -17,7 +17,11 @@ module XmlHate
         end
       end
       objects = pull_the_objects_from_the_xml_document(meth)
-      objects.count == 1 ? objects[0] : objects
+      if meth.singularize == meth
+        objects.count == 1 ? objects[0] : objects
+      else
+        objects
+      end
     end
 
     private
