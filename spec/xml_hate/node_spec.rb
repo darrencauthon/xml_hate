@@ -149,4 +149,11 @@ describe XmlHate::Node do
     end
   end
 
+  describe "to_ary" do
+    it "should return nil, allowing this class to be used with .flatten" do
+      object = XmlHate::Node.new({})
+      object.to_ary.nil?.must_equal true
+    end
+  end
+
 end
